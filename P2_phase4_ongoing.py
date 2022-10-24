@@ -55,22 +55,21 @@ def get_pages_of_category(dict_categories):
 
             if has_next_page(soup):
                 next_url = soup.find('ul', {'class': 'pager'}).find('li', {'class': 'next'}).find('a').get('href')
-                next_page = url_base[:-10] + next_url # regex pour être plus clean
+                next_page = url_base[:-10] + next_url
                 pages.append(next_page)
-        print(f"\tpage found: {len(pages)}.")
+        print(f"\tfound: {len(pages)} page(s).")
 
 def get_category_books_link(dict_categories_pages):
     '''
     Get the link of every books of a category through multiple pages.
-    Returns a dictionary key: category, value: every books's url.
+    Returns a dictionary (key=category, value=list of books url).
     '''  
     print(f"\n\t- - - Start : getting every book's url by category - - - ")
     category_books_url = {}
 
     for category, urls in dict_categories_pages.items():
         print(f"\n\t- {category} -")
-
-        i = 0
+        
         list_url = []
         for url in urls:
             soup = parse(url)
@@ -81,8 +80,7 @@ def get_category_books_link(dict_categories_pages):
                 url_base = 'https://books.toscrape.com/catalogue'
                 #href = link.get('href')
                 list_url.append(url_base + link[8:])
-
-            i += 1
+            
             category_books_url[category] = list_url
             print(f"\tpage {i} over {len(urls)}")
         print(f"\tbooks found : {len(list_url)}")
@@ -92,11 +90,12 @@ def get_category_books_link(dict_categories_pages):
 
 def get_books_data(dict_categories_books_url):
     """
-    Extract data about a book page from a given dictionary(key=category, value=list of books url).
-    Write a csv for each category into subfolder of 2nd argumnets.
+    Extracts data about a book page from a given dictionary (key=category, value=list of books url).
+    Writes a csv for each category into subfolder "csv".
+    Saves covers of every books into subfolder "booksCover".
     """
 
-    # Create folder 'BooksToScrappe' and subfolder into the current working directory
+    # Create folder 'BooksToScrappe' and subfolders into the current working directory
     folder = Path.cwd() / ('BooksToScrappe')
     csvFolder = os.path.abspath(folder / Path('csv'))
     booksCover = os.path.abspath(folder / Path('books_cover'))
@@ -107,7 +106,7 @@ def get_books_data(dict_categories_books_url):
         data_by_category = {}
 
         # Create csv for the category
-        en_tete = ["title", "category", "description", "review_rating", "image_url", "upc", "price_incl_tax", "price_excl_tax", "availability"]
+        header = ["title", "category", "description", "review_rating", "image_url", "upc", "price_incl_tax", "price_excl_tax", "availability"]
         print(f"writing {category} csv.")
         for idx, link in enumerate(books_url):
             data_by_category[f"{idx + 1}"] = {}
@@ -134,6 +133,7 @@ def get_books_data(dict_categories_books_url):
             image = soup.find('img').get('src')
             imageLink = 'https://books.toscrape.com' + image[5:] # var use below to download the cover
             data_by_category[f"{idx + 1}"]['image_url'] = imageLink
+            
             # Download image to folder 'booksCover'
             cover = open(os.path.abspath(booksCover)+'/'+f"{cleanName(titre)}.jpg", 'wb')
             cover.write(requests.get(imageLink).content)
@@ -155,12 +155,13 @@ def get_books_data(dict_categories_books_url):
         
         with open(os.path.abspath(csvFolder)+'/'+f"{category}.csv", 'w', newline='', encoding='utf-8') as category_csv:
             writer = csv.writer(category_csv)
-            writer.writerow(en_tete)
+            writer.writerow(header)
             for book, datas in data_by_category.items():
                 writer.writerow(datas.values())
                 print(datas['title'])
                 
         print(f"{category}.csv finished\n")
+    print("csv and books' cover saved under 'BooksToScrappe' folder")
 
 
 
@@ -170,7 +171,7 @@ def get_books_data(dict_categories_books_url):
 
 
 url = 'https://books.toscrape.com/'
-dico_categories_url = get_categories(url) #ok
-get_pages_of_category(dico_categories_url) #ok
-books_url = get_category_books_link(dico_categories_url)
-get_books_data(books_url)
+categories = get_categories(url) #ok
+get_pages_of_category(categories) #ok
+booksUrl = get_category_books_link(categories)
+get_books_data(booksUrl)
