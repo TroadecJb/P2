@@ -15,8 +15,8 @@ Writes a CSV file for each category with several informations about each book:
 
 # Environment
 
-Python>=3.10.7
-Beautifulsoup4==4.11.1
+Python>=3.10.7\
+Beautifulsoup4==4.11.1\
 requests==2.28.1
 
 # Information
