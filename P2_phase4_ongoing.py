@@ -71,7 +71,7 @@ def get_category_books_link(dict_categories_pages):
         print(f"\n\t- {category} -")
         
         list_url = []
-        for url in urls:
+        for idx, url in enumerate(urls):
             soup = parse(url)
             list_books = soup.find_all('article', {'class': 'product_pod'})
 
@@ -82,7 +82,7 @@ def get_category_books_link(dict_categories_pages):
                 list_url.append(url_base + link[8:])
             
             category_books_url[category] = list_url
-            print(f"\tpage {i} over {len(urls)}")
+            print(f"\tpage {idx + 1} over {len(urls)}")
         print(f"\tbooks found : {len(list_url)}")
         print(f" \t-end-")
     print(f"\n\t- - - End : getting every book's url by category - - - ")
@@ -95,8 +95,8 @@ def get_books_data(dict_categories_books_url):
     Saves covers of every books into subfolder "booksCover".
     """
 
-    # Create folder 'BooksToScrappe' and subfolders into the current working directory
-    folder = Path.cwd() / ('BooksToScrappe')
+    # Create folder 'BooksToScrape' and subfolders into the current working directory
+    folder = Path.cwd() / ('BooksToScrape')
     csvFolder = os.path.abspath(folder / Path('csv'))
     booksCover = os.path.abspath(folder / Path('books_cover'))
     os.makedirs(csvFolder)
@@ -161,14 +161,8 @@ def get_books_data(dict_categories_books_url):
                 print(datas['title'])
                 
         print(f"{category}.csv finished\n")
-    print("csv and books' cover saved under 'BooksToScrappe' folder")
-
-
-
-
+    print("csv and books' cover saved under 'BooksToScrape' folder")
 #########
-
-
 
 url = 'https://books.toscrape.com/'
 categories = get_categories(url) #ok
