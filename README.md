@@ -1,7 +1,7 @@
 # P2 - Surveillance des prix
 ___
-Extract data off [BooksToScrape](https://books.toscrape.com/).  
-Write a CSV file for each category with several informations about each book:
+Extracts data off [BooksToScrape](https://books.toscrape.com/).  
+Writes a CSV file for each category with several informations about each book:
  - title
  - description
  - category
