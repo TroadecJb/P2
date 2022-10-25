@@ -25,5 +25,5 @@ This script will create a main folder **BooksToScrape** in the current work dire
 Two subfolders **csv** and **books_cover**.  
 In the **csv** sublfoder, a csv file for each category will be created.
 Each row will represent a book.  
-In the **books_cover** subfolder, a folder will be created for each catageroy.  
-In each of those folders the image of each book's cover will be saved and the book's title.
+In the **books_cover** subfolder, a folder will be created for each category.  
+In each of those folders, the image of each book's cover will be saved under the book's title.
