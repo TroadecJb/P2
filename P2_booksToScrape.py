@@ -95,7 +95,7 @@ def get_books_data(dict_categories_books_url):
     """
     Extracts data about a book page from a given dictionary (key=category, value=list of books url).
     Writes a csv for each category into subfolder "csv".
-    Saves covers of every books into subfolder "booksCover".
+    Saves covers of every books into categories' subfolder of "booksCover".
     """
 
     # Create folder 'BooksToScrape' and subfolders into the current working directory
@@ -108,9 +108,9 @@ def get_books_data(dict_categories_books_url):
     for category, books_url in dict_categories_books_url.items():
         data_by_category = {}
 
+        # Create subfolder for each categorie covers.
         coverCategory = os.path.abspath(booksCover / Path(f"{category}_cover"))
         os.makedirs(coverCategory)
-
 
         # Create csv for the category
         header = ["title", "category", "description", "review_rating", "image_url", "upc", "price_incl_tax", "price_excl_tax", "availability"]
