@@ -17,7 +17,7 @@ def parse(url):
 
 def has_next_page(soup):
     '''
-    Return True if the provided page has a next page.
+    Returns True if the provided page has a next page.
     '''
     if soup.find('li', {'class': 'next'}):
         return True
@@ -25,12 +25,16 @@ def has_next_page(soup):
         return False
 
 def cleanName(inputName):
+    '''
+    Removes characters that might cause an issue in filename.
+    Works on Windows, should works in MacOs and Linux.
+    '''
     unwantedChar = '"%:/,.\\[]<>*?'
     return ''.join([c for c in inputName if c not in unwantedChar])
 
 def get_categories(url):
     '''
-    Get a dictionary of every category and their urls
+    Get a dictionary of every category and their urls.
     '''
     dict_categories = {}
     
@@ -105,6 +109,10 @@ def get_books_data(dict_categories_books_url):
     for category, books_url in dict_categories_books_url.items():
         data_by_category = {}
 
+        coverCategory = os.path.abspath(booksCover / Path(f"{category}_cover"))
+        os.makedirs(coverCategory)
+
+
         # Create csv for the category
         header = ["title", "category", "description", "review_rating", "image_url", "upc", "price_incl_tax", "price_excl_tax", "availability"]
         print(f"writing {category} csv.")
@@ -135,7 +143,7 @@ def get_books_data(dict_categories_books_url):
             data_by_category[f"{idx + 1}"]['image_url'] = imageLink
             
             # Download image to folder 'booksCover'
-            cover = open(os.path.abspath(booksCover)+'/'+f"{cleanName(titre)}.jpg", 'wb')
+            cover = open(os.path.abspath(coverCategory)+'/'+f"{cleanName(titre)}.jpg", 'wb')
             cover.write(requests.get(imageLink).content)
             cover.close()
 
@@ -158,14 +166,20 @@ def get_books_data(dict_categories_books_url):
             writer.writerow(header)
             for book, datas in data_by_category.items():
                 writer.writerow(datas.values())
-                print(datas['title'])
+                print(f"\t{datas['title']}")
                 
         print(f"{category}.csv finished\n")
     print("csv and books' cover saved under 'BooksToScrape' folder")
+
+def main():
+    url = 'https://books.toscrape.com/'
+    categories = get_categories(url)
+    get_pages_of_category(categories)
+    booksUrl = get_category_books_link(categories)
+    get_books_data(booksUrl) 
 #########
 
-url = 'https://books.toscrape.com/'
-categories = get_categories(url) #ok
-get_pages_of_category(categories) #ok
-booksUrl = get_category_books_link(categories)
-get_books_data(booksUrl)
+   
+
+if __name__=="__main__":
+    main()
