@@ -1,5 +1,5 @@
 # P2 - Surveillance des prix
-___
+
 Extracts data off [BooksToScrape](https://books.toscrape.com/).  
 Writes a CSV file for each category with several informations about each book:
  - title
@@ -14,13 +14,13 @@ Writes a CSV file for each category with several informations about each book:
  - cover's url
 
 # Environment
-___
+
 Python>=3.10.7
 Beautifulsoup4==4.11.1
 requests==2.28.1
 
 # Information
-___
+
 This script will create a main folder **BooksToScrape** in the current work directory.  
 Two subfolders **csv** and **books_cover**.  
 In the **csv** sublfoder, a csv file for each category will be created.
