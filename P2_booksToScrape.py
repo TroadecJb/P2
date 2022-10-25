@@ -82,7 +82,6 @@ def get_category_books_link(dict_categories_pages):
             for book in list_books:
                 link = book.find('a').get('href')
                 url_base = 'https://books.toscrape.com/catalogue'
-                #href = link.get('href')
                 list_url.append(url_base + link[8:])
             
             category_books_url[category] = list_url
@@ -135,7 +134,7 @@ def get_books_data(dict_categories_books_url):
 
             # rating
             rating = soup.find('p', class_=re.compile('star-rating'))
-            data_by_category[f"{idx + 1}"]['review_rating'] = rating['class'][1] # à améliorer
+            data_by_category[f"{idx + 1}"]['review_rating'] = rating['class'][1]
 
             # Image URL
             image = soup.find('img').get('src')
@@ -178,8 +177,6 @@ def main():
     booksUrl = get_category_books_link(categories)
     get_books_data(booksUrl) 
 #########
-
-   
 
 if __name__=="__main__":
     main()
