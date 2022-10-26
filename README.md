@@ -22,11 +22,11 @@ $ cd /path/to/project
 $ python -m -venv <environment name>
 ```
 
-activation windows
-```$ ~<environment name>\Scripts\activate.bat```
-activation macos
-```$ ~source <environment name>/bin/activate```
-packages
+activation windows\
+```$ ~<environment name>\Scripts\activate.bat```\
+activation macos\
+```$ ~source <environment name>/bin/activate```\
+packages\
 ```(<environment name>$ python -m pip install -r requirements.txt```
 
 # Requirements
