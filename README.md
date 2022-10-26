@@ -25,12 +25,12 @@ $ python -m -venv <environment name>
 ```
 
 activation windows\
-```$ ~<environment name>\Scripts\activate.bat```\
+```$ ~env\Scripts\activate.bat```\
 activation macos\
-```$ ~source <environment name>/bin/activate```\
+```$ ~source env/bin/activate```\
 
 packages installation\
-```(<environment name>$ python -m pip install -r requirements.txt```
+```(env)$ python -m pip install -r requirements.txt```
 
 *for further details, [click here](https://docs.python.org/fr/3/library/venv.html#venv-def)*
 
