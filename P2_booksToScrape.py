@@ -127,7 +127,7 @@ def get_books_data(dict_categories_books_url):
             data_by_category[f"{idx + 1}"]['category'] = f"{category}"
 
             # description
-            if soup.find('article', {'class': 'product_page'}).find('p', {'class': ''}) == True:
+            if soup.find('article', {'class': 'product_page'}).find('p', {'class': ''}):
                 data_by_category[f"{idx + 1}"]['description'] = soup.find('article', {'class': 'product_page'}).find('p', {'class': ''}).text
             else:
                 data_by_category[f"{idx + 1}"]['description'] = 'no description'
