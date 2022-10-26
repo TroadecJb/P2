@@ -15,10 +15,21 @@ Writes a CSV file for each category with several informations about each book:
 
 # Environment
 
-Python>=3.10.7
+```
+$ cd /path/to/project
+$ python -m -venv <environment name>
+```
+
+activation windows
+```$ ~<environment name>\Scripts\activate.bat```
+activation macos
+```$ ~source <environment name>/bin/activate```
+packages
+```(<environment name>$ python -m pip install -r requirements.txt```
 
 # Requirements
 
+Python>=3.10.7
 Beautifulsoup4==4.11.1\
 requests==2.28.1
 
