@@ -15,6 +15,8 @@ Writes a CSV file for each category with several informations about each book:
 
 # Environment
 
+To use this script in an vitrual environment, follow these steps.
+
 Python>=3.10.7
 
 ```
@@ -26,10 +28,11 @@ activation windows\
 ```$ ~<environment name>\Scripts\activate.bat```\
 activation macos\
 ```$ ~source <environment name>/bin/activate```\
-packages\
+
+packages installation\
 ```(<environment name>$ python -m pip install -r requirements.txt```
 
-*for further details, [check here](https://docs.python.org/fr/3/library/venv.html#venv-def)*
+*for further details, [click here](https://docs.python.org/fr/3/library/venv.html#venv-def)*
 
 # Requirements
 
