@@ -29,6 +29,8 @@ activation macos\
 packages\
 ```(<environment name>$ python -m pip install -r requirements.txt```
 
+*for further details, [check here](https://docs.python.org/fr/3/library/venv.html#venv-def)*
+
 # Requirements
 
 Beautifulsoup4==4.11.1\
